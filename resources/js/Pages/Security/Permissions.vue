@@ -2,7 +2,7 @@
     <AppLayout title="Permissions">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Permissions
+                Permisos
             </h2>
         </template>
 
