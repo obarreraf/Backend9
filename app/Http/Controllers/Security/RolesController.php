@@ -14,21 +14,17 @@ class RolesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-  /*  public function index()
-    {
-        $roles = Role::select('id','name')->with('permissions')->orderByDesc('id')->get();
-        //return $roles;
-        return Inertia::render('Security/Roles', compact('roles'));
-    }*/
     public function index(Request $request)
-    {
-        return Inertia::render('Security/Roles', [
-            'roles' => Role::select('id','name')
-                        ->with('permissions')
-                        ->orderByDesc('id')
-                        ->where('name', 'LIKE', "%$request->q%")
-                        ->get()
-        ]);
+    {  
+        $roles = Role::orderByDesc('id')->paginate(10)->through(function ($roles) {
+            return [
+                'id' => $roles->id,
+                'name' => $roles->name,
+            ];
+        });
+        
+        //return $roles;
+        return Inertia::render('Security/Roles', ['roles' => $roles]);
     }
 
     /**
@@ -48,9 +44,11 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Role $role)
     {
-        //
+        $role = Role::findOrFail($role);
+        return $role;
+        //return Inertia::render('Security/Show', compact('role'));
     }
 
     /**

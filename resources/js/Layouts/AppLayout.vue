@@ -55,6 +55,9 @@ const logout = () => {
                                 <JetNavLink :href="route('permisos.index')" :active="route().current('permisos')">
                                     Permisos
                                 </JetNavLink>
+                                <JetNavLink :href="route('roles.index')" :active="route().current('roles')">
+                                    Roles
+                                </JetNavLink>
                             </div>
                         </div>
 
@@ -216,6 +219,9 @@ const logout = () => {
                         </JetResponsiveNavLink>
                         <JetResponsiveNavLink :href="route('permisos.index')" :active="route().current('permisos.index')">
                             Permisos
+                        </JetResponsiveNavLink>
+                        <JetResponsiveNavLink :href="route('roles.index')" :active="route().current('roles.index')">
+                            Roles
                         </JetResponsiveNavLink>
                     </div>
 

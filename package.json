@@ -25,6 +25,7 @@
         "vue-loader": "^17.0.0"
     },
     "dependencies": {
-        "@jobinsjp/vue3-datatable": "^1.0.15"
+        "@jobinsjp/vue3-datatable": "^1.0.15",
+        "@popperjs/core": "^2.11.5"
     }
 }

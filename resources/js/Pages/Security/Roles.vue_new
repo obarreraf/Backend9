@@ -1,0 +1,111 @@
+<template>
+    <AppLayout title="Roles">
+        <template #header>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                Módulo de Roles
+            </h2>
+        </template>
+        <div class="flex items-center justify-between mb-6">
+        <search-filter v-model="form.search" class="mr-4 w-full max-w-md" @reset="reset">
+            <label class="block text-gray-700">Trashed:</label>
+            <select v-model="form.trashed" class="form-select mt-1 w-full">
+            <option :value="null" />
+            <option value="with">With Trashed</option>
+            <option value="only">Only Trashed</option>
+            </select>
+        </search-filter>
+        <Link class="btn-indigo" href="/contacts/create">
+            <span>Create</span>
+            <span class="hidden md:inline">&nbsp;Contact</span>
+        </Link>
+        </div>
+        <div class="bg-white rounded-md shadow overflow-x-auto">
+        <table class="w-full whitespace-nowrap">
+            <tr class="text-left font-bold">
+            <th class="pb-4 pt-6 px-6">Name</th>
+            <th class="pb-4 pt-6 px-6">Organization</th>
+            <th class="pb-4 pt-6 px-6">City</th>
+            <th class="pb-4 pt-6 px-6" colspan="2">Phone</th>
+            </tr>
+            <tr v-for="role in roles.data" :key="role.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+            <td class="border-t">
+                <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="`/contacts/${role.id}/edit`">
+                {{ role.name }}
+                <icon v-if="contact.deleted_at" name="trash" class="flex-shrink-0 ml-2 w-3 h-3 fill-gray-400" />
+                </Link>
+            </td>
+            <td class="border-t">
+                <Link class="flex items-center px-6 py-4" :href="`/roles/${role.id}/edit`" tabindex="-1">
+                <div v-if="role.name">
+                    {{ role.name }}
+                </div>
+                </Link>
+            </td>
+            <td class="border-t">
+                <Link class="flex items-center px-6 py-4" :href="`/roles/${role.id}/edit`" tabindex="-1">
+                {{ role.name }}
+                </Link>
+            </td>
+            <td class="border-t">
+                <Link class="flex items-center px-6 py-4" :href="`/roles/${role.id}/edit`" tabindex="-1">
+                {{ role.name }}
+                </Link>
+            </td>
+            <td class="w-px border-t">
+                <Link class="flex items-center px-4" :href="`/roles/${role.id}/edit`" tabindex="-1">
+                <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
+                </Link>
+            </td>
+            </tr>
+            <tr v-if="role.data.length === 0">
+            <td class="px-6 py-4 border-t" colspan="4">No contacts found.</td>
+            </tr>
+        </table>
+        </div>
+    <pagination class="mt-6" :links="roles.links" />
+
+</AppLayout>
+</template>
+
+<script>
+import { Head, Link } from '@inertiajs/inertia-vue3'
+import pickBy from 'lodash/pickBy'
+import Welcome from '@/Jetstream/Welcome.vue';
+import throttle from 'lodash/throttle'
+import mapValues from 'lodash/mapValues'
+import Pagination from '@/Components/Pagination'
+import SearchFilter from '@/Components/SearchFilter'
+export default {
+  components: {
+    Head,
+    Link,
+    Pagination,
+    SearchFilter,
+  },
+  props: {
+    filters: Object,
+    roles: Object,
+  },
+  data() {
+    return {
+      form: {
+        search: this.filters.search,
+        trashed: this.filters.trashed,
+      },
+    }
+  },
+  watch: {
+    form: {
+      deep: true,
+      handler: throttle(function () {
+        this.$inertia.get('/roles', pickBy(this.form), { preserveState: true })
+      }, 150),
+    },
+  },
+  methods: {
+    reset() {
+      this.form = mapValues(this.form, () => null)
+    },
+  },
+}
+</script>
