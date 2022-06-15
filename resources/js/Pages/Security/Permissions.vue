@@ -6,20 +6,24 @@
             </h2>
         </template>
 
-        <Bcklrvl>
-            <template #col>
-                <th class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">ID</th>
-                <th class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">Nombre</th>
-                <th class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">Guardian</th>
-            </template>
-            <template #row>
-                <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100" v-for="p in permissions" :key="p.id">
-                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ p.id }}</td>
-                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ p.name }}</td>
-                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ p.guard_name }}</td>
-                </tr>
-            </template>
-        </Bcklrvl>
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                    <BackTable>
+                        <template #col>
+                            <th class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">ID</th>
+                            <th class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">Nombre</th>
+                        </template>
+                        <template #row>
+                            <tr v-for="p in permissions.data" :key="p.id" class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ p.id }}</td>
+                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ p.name }}</td>
+                            </tr>
+                        </template>
+                    </BackTable>
+                </div>
+            </div>
+        </div>
     </AppLayout>
 </template>
 

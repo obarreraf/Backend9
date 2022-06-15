@@ -11,8 +11,9 @@ class PermissionsController extends Controller
 {
     public function index()
     {
-        $permissions = Permission::select('id','name')->get();
+        $permissions = Permission::select('id','name')->orderByDesc('id')->get();
 
-        return Inertia::render('Security/Permissions', compact('permissions'));
+        return $permissions;
+        //return Inertia::render('Security/Permissions', compact('permissions'));
     }
 }
