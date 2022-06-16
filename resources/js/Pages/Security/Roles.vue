@@ -17,6 +17,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                         <tr class="text-left font-bold">
                         <th class="pb-4 pt-6 px-6">ID</th>
                         <th class="pb-4 pt-6 px-6">Nombre</th>
+                        <th class="pb-4 pt-6 px-6">Ver Permisos</th>
                         </tr>
                         <tr v-for="role in roles.data" :key="role.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
                             <td class="border-t">
@@ -28,6 +29,9 @@ import { Link } from '@inertiajs/inertia-vue3'
                                 <Link class="flex items-center px-6 py-4 focus:text-indigo-500" :href="`/roles/${role.id}/show`">
                                 {{ role.name }}
                                 </Link>
+                            </td>
+                            <td class="border-t">
+                               <a >Permisos</a>
                             </td>
                         </tr>
                         <tr v-if="roles.data.length === 0">
@@ -43,6 +47,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 
 <script>
 import Pagination from '@/Components/Pagination';
+import Modal from '@/Jetstream/Modal.vue';
 
 export default {
   components: {

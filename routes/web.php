@@ -3,7 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\Security;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,8 +27,9 @@ Route::get('/', function () {
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified',])->group(function () {
     Route::get('/dashboard', function () { return Inertia::render('Dashboard'); })->name('dashboard');
-    Route::get('/permisos', [Security\PermissionsController::class, 'index'] )->name('permisos.index');
-   // Route::get('/roles', [Security\RolesController::class, 'index'] )->name('roles.index');
-    Route::resource('/roles',Security\RolesController::class);
+    Route::get('/dashboard/permisos', [App\Http\Controllers\Security\PermissionsController::class, 'index'] )->name('permisos.index');
+    Route::resource('/dashboard/roles',App\Http\Controllers\Security\RolesController::class);
+    Route::resource('/dashboard/users',App\Http\Controllers\UserController::class); 
+
 
 });
