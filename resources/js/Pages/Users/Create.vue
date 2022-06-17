@@ -9,7 +9,7 @@ import { Link } from '@inertiajs/inertia-vue3';
                 Crear Nuevo Usuario
             </h2>
         </template>
-
+        {{ errors }}
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -17,13 +17,13 @@ import { Link } from '@inertiajs/inertia-vue3';
                         <form @submit.prevent="submit">
                                 <label for="name"  class="block font-medium text-sm text-gray-700 my-2">Nombre:</label>
                                 <input type="text" id="name" v-model="form.name" class="form-input w-full rounded-md shadow-sm"/>
-                                <div v-if="errors.name">{{ errors.name }}</div>
+                                <div v-if="errors.name" class="error-message">{{ errors.name }}</div>
                                 <label for="email"  class="block font-medium text-sm text-gray-700 my-2">Email:</label>
                                 <input type="text" id="email" v-model="form.email" class="form-input w-full rounded-md shadow-sm"/>
-                                <div v-if="errors.email">{{ errors.email }}</div>
+                                <div v-if="errors.email"  class="border-red-500">{{ errors.email }}</div>
                                 <label for="password"  class="block font-medium text-sm text-gray-700 my-2">Contraseña:</label>
                                 <input type="password" id="password" v-model="form.password" class="form-input w-full rounded-md shadow-sm"/>
-                                <div v-if="errors.password">{{ errors.password }}</div>
+                                <div v-if="errors.password"  class="border-red-500">{{ errors.password }}</div>
                                 <label for="password_confirmation" class="block font-medium text-sm text-gray-700 my-2">Confirme Contraseña:</label>
                                 <input type="password" id="password_confirmation " v-model="form.password_confirmation" class="form-input w-full rounded-md shadow-sm"/>
                                 <div v-if="errors.password_confirmation ">{{ errors.password_confirmation  }}</div>

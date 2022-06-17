@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreUserRequest;
 use Inertia\Inertia;
 use App\Models\User;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
@@ -45,15 +44,9 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        $request->validate([
-            'name' => ['required','max:80'],
-            'email' => ['required','unique:users','max:60'],
-            'password' => ['required', 'confirmed', Password::min(8)],
-        ]);
-
-        $result = User::create($request->all());
+        User::create($request->all());
 
         return Inertia::render('Users/Create');
     }
