@@ -31,7 +31,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                                 </Link>
                             </td>
                             <td class="border-t">
-                               <a >Permisos</a>
+                                <inertia-link :href="route('roles.show', role.id)" class="bg-blue-500 hover:bg-blue-700 rounded-md text-white font-bold py-2 px-4 my-2">Ver Detalle</inertia-link>
                             </td>
                         </tr>
                         <tr v-if="roles.data.length === 0">

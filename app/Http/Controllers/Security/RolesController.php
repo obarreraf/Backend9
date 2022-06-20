@@ -46,9 +46,9 @@ class RolesController extends Controller
      */
     public function show(Role $role)
     {
-        $role = Role::findOrFail($role);
-        return $role;
-        //return Inertia::render('Security/Show', compact('role'));
+        //$role = Role::findOrFail($role);
+        //return $role;
+        return Inertia::render('Security/Show', compact('role'));
     }
 
     /**

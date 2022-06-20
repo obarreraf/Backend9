@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use Inertia\Inertia;
 use App\Models\User;
 
@@ -57,9 +58,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        $admuser = $user;
+        return Inertia::render('Users/Show', compact('admuser'));
     }
 
     /**
@@ -68,9 +70,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $admuser = $user;
+        return Inertia::render('Users/Edit', compact('admuser'));
     }
 
     /**
@@ -80,9 +83,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, User $admuser)
     {
-        //
+        dd($admuser);
+        $admuser->update($request->all());
     }
 
     /**

@@ -25,7 +25,7 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 
                             <hr class="my-6">
 
-                            <inertia-link :href="route('role.index')" class="bg-red-500 hover:bg-blue-700 rounded-md text-white font-bold py-2 px-4 my-2">
+                            <inertia-link :href="route('roles.index')" class="bg-red-500 hover:bg-blue-700 rounded-md text-white font-bold py-2 px-4 my-2">
                                 Volver
                             </inertia-link>
                         </div>
@@ -41,7 +41,7 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 
         },
         props:{
-            note: Object,
+            role: Object,
         }
     }
 </script>

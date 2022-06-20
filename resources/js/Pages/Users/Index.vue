@@ -30,7 +30,10 @@ import { Link } from '@inertiajs/inertia-vue3';
                                     <td class="p-3 border-t">{{ user.id }}</td>
                                     <td class="p-3 border-t">{{ user.name }}</td>
                                     <td class="p-3 border-t">{{ user.email }}</td>
-                                    <td class="p-3 border-t"></td>
+                                    <td class="p-3 border-t">
+                                        <inertia-link :href="route('users.show', user.id)" class="bg-blue-500 hover:bg-blue-700 rounded-md text-white font-bold py-2 px-4 my-2">Ver Detalle</inertia-link>
+                                        <inertia-link :href="route('users.edit', user.id)" class="bg-blue-500 hover:bg-blue-700 rounded-md text-white font-bold py-2 px-4 my-2">Editar</inertia-link>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

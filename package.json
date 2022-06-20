@@ -26,6 +26,7 @@
     },
     "dependencies": {
         "@jobinsjp/vue3-datatable": "^1.0.15",
-        "@popperjs/core": "^2.11.5"
+        "@popperjs/core": "^2.11.5",
+        "ziggy-js": "^1.4.6"
     }
 }
