@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class
         ]);
     
-        User::factory(10)->create();
+        User::factory(10)->create()->each(function ($user) {
+            $user->assignRole('customer'); // assuming 'supscription' was a typo
+        });
     }
 }

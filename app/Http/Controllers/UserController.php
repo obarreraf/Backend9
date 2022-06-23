@@ -7,6 +7,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Inertia\Inertia;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -17,15 +18,16 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(10)->through(function ($users) {
-            return [
-                'id' => $users->id,
-                'name' => $users->name,
-                'email' => $users->email,
-            ];
-        });
+        $users = DB::table('users')
+            ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+            ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
+            ->select('users.id as user_id', 
+            'users.name as user_name', 
+            'users.email as email', 
+            'roles.name as role_name')
+            ->paginate(10);
         
-        //return $users;
+        #return $users;
         return Inertia::render('Users/Index', ['users' => $users]);
     }
 
@@ -58,9 +60,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
-        $admuser = $user;
+        $admuser = User::findOrFail($id);
+
         return Inertia::render('Users/Show', compact('admuser'));
     }
 
@@ -70,9 +73,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        $admuser = $user;
+        $admuser = User::findOrFail($id);
+
         return Inertia::render('Users/Edit', compact('admuser'));
     }
 
@@ -83,10 +87,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUserRequest $request, User $admuser)
+    public function update(UpdateUserRequest $request, $admuser)
     {
-        dd($admuser);
-        $admuser->update($request->all());
+        dd($request);
+        User::find($admuser)->update($request->all());
     }
 
     /**

@@ -76,7 +76,7 @@ export default {
     },
     methods: {
         submit() {
-            this.$inertia.put(this.route('users.update',{'admuser': this.admuser.id}), this.form)
+            this.$inertia.put(this.route('users.update',{'user2': this.admuser.id}), this.form)
         }
     }
 }

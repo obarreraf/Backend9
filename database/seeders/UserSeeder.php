@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
     {
      //Role creation
      $roleAdmin = Role::create(['name' => 'admin']);
-     $roleGuest = Role::create(['name' => 'guest']);
+     $roleCustomer = Role::create(['name' => 'customer']);
 
      //Permission Assigment
      Permission::create(['name' => 'show:role']);
@@ -47,7 +47,7 @@ class UserSeeder extends Seeder
      $user->email = 'guest@mail.com';
      $user->password = bcrypt('12345678');
      $user->save();
-     $user->assignRole($roleGuest);
+     $user->assignRole($roleCustomer);
 
     }
 }
